@@ -1,0 +1,30 @@
+name: CI - Mono Repo Football
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  backend:
+    name: Backend - Placeholder
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v3
+
+      - name: Simular build backend
+        run: echo "Backend OK (placeholder, sem build ainda)"
+
+  frontend:
+    name: Frontend - Placeholder
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v3
+
+      - name: Simular build frontend
+        run: echo "Frontend OK (placeholder, sem build ainda)"

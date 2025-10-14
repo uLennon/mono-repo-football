@@ -18,11 +18,8 @@ public class Team {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "formation", nullable = false)
-    private String formation;
-
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonManagedReference
-    private List<Player> players;
+    @JsonManagedReference("team-presets")
+    private List<Preset> presets;
 
 }

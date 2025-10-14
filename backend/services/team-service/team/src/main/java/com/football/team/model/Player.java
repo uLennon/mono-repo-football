@@ -1,9 +1,11 @@
 package com.football.team.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
 
 @Entity
 @Table(name = "players")
@@ -23,15 +25,19 @@ public class Player {
     @Column(name = "number")
     private Integer number;
 
-    @Column(name = "coords_top")
-    private String top;
-
-    @Column(name = "coords_left")
-    private String left;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id")
-    @JsonBackReference
+    @JsonBackReference("team-players")
     private Team team;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "preset_id")
+    @JsonBackReference("preset-players")
+    private Preset preset;
+
+    @OneToMany(mappedBy = "player", fetch = FetchType.LAZY)
+    @JsonManagedReference("player-correlates")
+    private List<Correlate> presetsCorrelate;
 
 }

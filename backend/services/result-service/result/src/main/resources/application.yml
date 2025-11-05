@@ -1,1 +1,10 @@
-spring.application.name=result
+spring:
+  data:
+    mongodb:
+      uri: mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@localhost:27018/result_sim?authSource=admin
+      database: result_sim
+      authentication-database: admin
+  kafka:
+    bootstrap-servers: localhost:9092
+server:
+  port: 8082

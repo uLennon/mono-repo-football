@@ -1,7 +1,9 @@
 package com.football.match.controller;
 
 import com.football.match.model.Match;
+import com.football.match.model.MatchDTO;
 import com.football.match.model.MatchSummary;
+import com.football.match.model.PlayMatch;
 import com.football.match.service.MatchService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -34,5 +36,10 @@ public class MatchController {
     public ResponseEntity<Void> deleteMatch(@PathVariable String id) {
         matchService.deleteMatch(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/play")
+    public ResponseEntity<PlayMatch> playMatch(@RequestBody MatchDTO matchDTO) {
+        return ResponseEntity.ok(matchService.buildPlayMatch(matchDTO));
     }
 }

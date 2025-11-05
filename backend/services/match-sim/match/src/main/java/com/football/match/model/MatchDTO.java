@@ -1,42 +1,25 @@
 package com.football.match.model;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.util.Date;
-
-
-@Document(collection = "matches")
-public class Match {
-    @Id
-    private String id;
-    private Date matchDate;
-    private int teamId;
+public class MatchDTO {
+    private String teamIdVerso;
+    private Integer teamId;
     private String name;
     private String presetStrategy;
     private String presetFormation;
 
-    public String getId() {
-        return id;
+    public String getTeamIdVerso() {
+        return teamIdVerso;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setTeamIdVerso(String teamIdVerso) {
+        this.teamIdVerso = teamIdVerso;
     }
 
-    public Date getMatchDate() {
-        return matchDate;
-    }
-
-    public void setMatchDate(Date matchDate) {
-        this.matchDate = matchDate;
-    }
-
-    public int getTeamId() {
+    public Integer getTeamId() {
         return teamId;
     }
 
-    public void setTeamId(int teamId) {
+    public void setTeamId(Integer teamId) {
         this.teamId = teamId;
     }
 
@@ -66,9 +49,8 @@ public class Match {
 
     @Override
     public String toString() {
-        return "Match{" +
-                "id='" + id + '\'' +
-                ", matchDate=" + matchDate +
+        return "MatchDTO{" +
+                "teamIdVerso='" + teamIdVerso + '\'' +
                 ", teamId=" + teamId +
                 ", name='" + name + '\'' +
                 ", presetStrategy='" + presetStrategy + '\'' +

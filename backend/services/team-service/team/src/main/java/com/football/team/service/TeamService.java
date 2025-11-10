@@ -5,12 +5,12 @@ import com.football.team.dto.PresetDTO;
 import com.football.team.dto.TeamDTO;
 import com.football.team.mapper.PlayerMapper;
 import com.football.team.mapper.PresetMapper;
-import com.football.team.model.Placement;
-import com.football.team.model.Player;
-import com.football.team.model.Preset;
-import com.football.team.model.Team;
+import com.football.team.model.*;
 import com.football.team.repository.PlacementRepository;
 import com.football.team.repository.TeamRepository;
+import com.football.team.repository.UserTeamRepository;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.annotation.TopicPartition;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,16 +21,18 @@ import java.util.stream.Collectors;
 @Service
 public class TeamService {
 
+    private final UserTeamRepository userTeamRepository;
     private final TeamRepository teamRepository;
     private final PlacementRepository placementRepository;
     private final PlayerMapper playerMapper;
     private final PresetMapper presetMapper;
 
-    public TeamService(TeamRepository teamRepository, PlacementRepository placementRepository, PlayerMapper playerMapper, PresetMapper presetMapper) {
+    public TeamService(TeamRepository teamRepository, PlacementRepository placementRepository, PlayerMapper playerMapper, PresetMapper presetMapper, UserTeamRepository userTeamRepository) {
         this.teamRepository = teamRepository;
         this.placementRepository = placementRepository;
         this.playerMapper = playerMapper;
         this.presetMapper = presetMapper;
+        this.userTeamRepository = userTeamRepository;
     }
 
 
@@ -48,7 +50,7 @@ public class TeamService {
 
     public Team createTeamByName(String name) {
         Team team = Team.builder().name(name).build();
-        Preset preset = Preset.builder().presetFormation("4-3-3").presetStrategy("balacend").build();
+        Preset preset = Preset.builder().presetId(1).presetFormation("4-3-3").presetStrategy("balacend").build();
         preset.setTeam(team);
 
         List<Placement> placements = new ArrayList<>();
@@ -127,4 +129,18 @@ public class TeamService {
         teamRepository.save(team);
         return preset;
     }
+
+    @KafkaListener(topicPartitions = @TopicPartition(topic = "user-team", partitions = { "0" }), containerFactory = "kafkaListenerContainerFactory")
+    public void createUserTeam(UserRequest userRequest) {
+        Team teamByName = createTeamByName(userRequest.getTeamName());
+        UserTeam userTeam = new UserTeam();
+        userTeam.setTeamName(userRequest.getTeamName());
+        userTeam.setAccount(userRequest.getAccount());
+        userTeam.setTeam(teamByName);
+        userTeamRepository.save(userTeam);
+        teamRepository.save(teamByName);
+
+    }
+
+
 }

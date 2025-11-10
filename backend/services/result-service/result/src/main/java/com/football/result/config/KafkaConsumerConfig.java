@@ -18,7 +18,7 @@ import java.util.Map;
 @Configuration
 public class KafkaConsumerConfig {
     @Value(value = "${spring.kafka.bootstrap-servers}")
-    private String bootstrapServers;// = "localhost:9092";
+    private String bootstrapServers;
 
     @Bean
     public ConsumerFactory<String, PlayMatch> consumerFactory() {

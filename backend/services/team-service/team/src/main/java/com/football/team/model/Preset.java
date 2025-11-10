@@ -3,34 +3,26 @@ package com.football.team.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
+@Data
 @Table(name = "presets")
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class Preset {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer identifier;
     private Integer presetId;
+
     private String presetStrategy;
     private String presetFormation;
 
-    @OneToMany(mappedBy = "preset", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JsonManagedReference
-    private List<Placement> playerPlacements = new ArrayList<>();
-
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id")
-    @JsonBackReference
+    @JsonBackReference("team-presets")
     private Team team;
 
     @OneToMany(mappedBy = "preset", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

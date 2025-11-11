@@ -2,12 +2,19 @@ spring:
   datasource:
     url: ${MYSQL_DATABASE}
     username: ${MYSQL_USER}
-    password: ${MYSQL_PASSWORD}
+    password: ${MYSQL_USER_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
 
+server:
+  port: ${SERVEPORT}
+
 kafka:
-  myServe: ${SERVEPORT}
+  myServe: ${MYSERVE}
+
+jwt:
+  secret: ${SECRET}
+  expiration: ${TIMEOUT}

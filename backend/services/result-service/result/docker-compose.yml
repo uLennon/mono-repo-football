@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  mongodb2:
+    image: mongo:5.0
+    container_name: mongodbResult
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongodb2_data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+volumes:
+  mongodb2_data:
+

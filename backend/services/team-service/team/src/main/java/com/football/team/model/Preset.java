@@ -14,7 +14,6 @@ public class Preset {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer identifier;
     private Integer presetId;
 
     private String presetStrategy;

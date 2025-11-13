@@ -11,6 +11,11 @@ import com.football.team.repository.TeamRepository;
 import com.football.team.repository.UserTeamRepository;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.annotation.TopicPartition;
+import com.football.team.model.Team;
+import com.football.team.model.UserRequest;
+import com.football.team.model.UserTeam;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.annotation.TopicPartition;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,18 +26,17 @@ import java.util.stream.Collectors;
 @Service
 public class TeamService {
 
-    private final UserTeamRepository userTeamRepository;
+
     private final TeamRepository teamRepository;
     private final PlacementRepository placementRepository;
     private final PlayerMapper playerMapper;
     private final PresetMapper presetMapper;
 
-    public TeamService(TeamRepository teamRepository, PlacementRepository placementRepository, PlayerMapper playerMapper, PresetMapper presetMapper, UserTeamRepository userTeamRepository) {
+    public TeamService(TeamRepository teamRepository, PlacementRepository placementRepository, PlayerMapper playerMapper, PresetMapper presetMapper) {
         this.teamRepository = teamRepository;
         this.placementRepository = placementRepository;
         this.playerMapper = playerMapper;
         this.presetMapper = presetMapper;
-        this.userTeamRepository = userTeamRepository;
     }
 
 
@@ -50,7 +54,7 @@ public class TeamService {
 
     public Team createTeamByName(String name) {
         Team team = Team.builder().name(name).build();
-        Preset preset = Preset.builder().presetId(1).presetFormation("4-3-3").presetStrategy("balacend").build();
+        Preset preset = Preset.builder().presetFormation("4-3-3").presetStrategy("balacend").build();
         preset.setTeam(team);
 
         List<Placement> placements = new ArrayList<>();
@@ -141,6 +145,4 @@ public class TeamService {
         teamRepository.save(teamByName);
 
     }
-
-
 }

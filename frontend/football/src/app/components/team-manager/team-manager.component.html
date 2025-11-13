@@ -1,0 +1,18 @@
+<div class="vw-100 vh-100 d-flex">
+    <app-header (navigation)="onHeaderNavigation($event)"></app-header>
+
+    <div *ngIf="mostrarFormation" class="vw-100 vh-100 d-flex">
+            <app-field [players]="players"></app-field>
+            <app-card-formation  (formationSelected)="onFormationChange($event)"></app-card-formation>
+        
+    </div>
+    <div *ngIf="mostrarHistorico" >
+        <app-match-list></app-match-list>
+    </div>
+    <div *ngIf="mostraMatches" class="flex-grow-1 overflow-auto">
+        <app-possible-matches></app-possible-matches>
+    </div>
+    <div *ngIf="mostraProfile">
+        <app-profile></app-profile>
+    </div>
+</div>

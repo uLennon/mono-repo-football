@@ -1,0 +1,19 @@
+<nav aria-label="Page navigation" class="space">
+    <ul class="pagination pagination-sm space-preset" >
+      <li class="page-item" [class.active]="currentSet === 1">
+        <a class="page-link" (click)="changePreset(1)" style="cursor: pointer;">
+          1
+        </a>
+      </li>
+      <li class="page-item" [class.active]="currentSet === 2">
+        <a class="page-link" (click)="changePreset(2)" style="cursor: pointer;">
+          2
+        </a>
+      </li>
+      <li class="page-item" [class.active]="currentSet === 3">
+        <a class="page-link" (click)="changePreset(3)" style="cursor: pointer;">
+          3
+        </a>
+      </li>
+    </ul>
+</nav>

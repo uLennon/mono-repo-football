@@ -1,0 +1,69 @@
+
+<div class="d-flex flex-column h-100 bg-dark text-white col-3 side-header" >
+  <div class="d-flex justify-content-center align-items-center py-3 border-bottom border-secondary">
+      <i class="bi bi-globe-americas-fill fs-4">Strategy</i>
+  </div>
+
+  <div class="d-flex flex-column gap-2 p-3 flex-grow-1 justify-content-center">
+      <div class="input-group input-group-sm">
+          <span class="input-group-text bg-transparent text-white border-secondary px-2">
+              <i class="bi bi-filter-square"></i>
+          </span>
+          <select class="form-select form-select-sm bg-dark text-white border-secondary" 
+                  [(ngModel)]="selectedFormation" 
+                  (ngModelChange)="selectFormation($event)">
+              <!-- <option value="4-3-3">4-3-3</option>
+              <option value="4-4-2">4-4-2</option>
+              <option value="3-5-2">3-5-2</option> -->
+              <option *ngFor="let formation of availableFormations" 
+                        [value]="formation">
+                        {{ formation }}
+              </option>
+          </select>
+      </div>
+
+      <div class="input-group input-group-sm">
+          <span class="input-group-text bg-transparent text-white border-secondary px-2">
+              <i class="bi bi-arrow-left-right"></i>
+          </span>
+          <select class="form-select form-select-sm bg-dark text-white border-secondary" 
+                  [(ngModel)]="selectedStrategy"
+                    (ngModelChange)="selectStrategy($event)">
+              <option *ngFor="let preset of presets" [value]="preset.presetStrategy">
+                      {{ preset.presetStrategy }}
+              </option>
+        </select>
+      </div>
+
+      <button class="btn btn-primary btn-sm w-100 mt-2" (click)="savePreset()">
+          <i class="bi bi-save me-1"></i>
+          Preset {{ currentPresetId }}
+      </button>
+
+      <div class="text-center mt-3">
+          <p class="mb-1 small">Preset Atual</p>
+          <app-preset-page (presetChange)="onPresetChange()"></app-preset-page>
+      </div>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmationModal">
+        <i class="bi bi-play-circle"></i> Play
+      </button>
+      
+      <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="confirmationModalLabel">Confirm</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Do you wanna play?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="confirmPlay()">Yes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>

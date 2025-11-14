@@ -10,4 +10,7 @@ spring:
     show-sql: true
 
 kafka:
-  myServe: ${SERVEPORT}
+  myServe: ${MYSERVE}
+
+server:
+  port: ${PORT}

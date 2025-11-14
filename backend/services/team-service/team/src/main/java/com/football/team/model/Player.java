@@ -1,12 +1,8 @@
 package com.football.team.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "players")
@@ -22,5 +18,10 @@ public class Player {
     private String name;
     private String position;
     private String number;
+
+    @ManyToOne
+    @JoinColumn(name = "preset_id")
+    @JsonBackReference
+    private Preset preset;
 
 }

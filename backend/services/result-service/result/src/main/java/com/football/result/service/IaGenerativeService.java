@@ -6,10 +6,11 @@ import com.football.result.model.Team;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +31,11 @@ public class IaGenerativeService {
     }
 
     public String generativeMatchWithIA(Team team1, Team team2) {
+        record Message(String content) {}
+        record Choice(Message message) {}
+        record BaseResp(int status_code, String status_msg) {}
+        record Response(List<Choice> choices, BaseResp base_resp) {}
+
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + API_KEY);
         headers.set("Content-Type", "application/json");
@@ -47,19 +53,41 @@ public class IaGenerativeService {
         requestBody.put("max_tokens", 10000);
 
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(requestBody, headers);
-        ResponseEntity<Map> response = restTemplate.postForEntity(API_URL, entity, Map.class);
+        var response = restTemplate.postForEntity(API_URL, entity, Response.class).getBody();
 
-        return filterResponse(response.getBody());
+        if (response == null || response.choices() == null || response.choices().isEmpty()) {
+            return gerarDescricaoEmpate(team1, team2);
+        }
+
+        return response.choices().getFirst().message().content();
     }
 
-    private String filterResponse(Map<String, Object> responseBody) {
+    private String gerarDescricaoEmpate(Team team1, Team team2) {
         try {
-            List<Map<String, Object>> choices = (List<Map<String, Object>>) responseBody.get("choices");
-            Map<String, Object> firstChoice = choices.get(0);
-            Map<String, Object> message = (Map<String, Object>) firstChoice.get("message");
-            return (String) message.get("content");
+            var objectMapper = new ObjectMapper();
+
+            var description = """
+                    Jogo equilibrado! O %s pressionou mais e criou boas oportunidades, \
+                    mas não conseguiu abrir o placar. O %s, com uma defesa sólida, \
+                    teve dificuldades em reagir, mas segurou o empate. \
+                    Resultado final: %s 0 x 0 %s.
+                    """.formatted(team1.getName(), team2.getName(), team1.getName(), team2.getName());
+
+            var result = Map.of(
+                    "scoreteamHome", 0,
+                    "scoreteamAway", 0,
+                    "winner", "Empate"
+            );
+
+            var resultMatch = Map.of(
+                    "matchDate", LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME),
+                    "result", result,
+                    "teams", List.of(team1, team2),
+                    "description", description
+            );
+            return objectMapper.writeValueAsString(resultMatch);
         } catch (Exception e) {
-            return "Error response: " + e.getMessage();
+            throw new RuntimeException(e);
         }
     }
 

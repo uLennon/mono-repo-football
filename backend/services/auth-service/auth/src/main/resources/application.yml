@@ -2,7 +2,7 @@ spring:
   datasource:
     url: ${MYSQL_DATABASE}
     username: ${MYSQL_USER}
-    password: ${MYSQL_USER_PASSWORD}
+    password: ${MYSQL_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:

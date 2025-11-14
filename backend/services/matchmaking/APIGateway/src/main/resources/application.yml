@@ -1,0 +1,13 @@
+
+server:
+  port: 8080
+
+services:
+  team: ${team}
+  auth: ${auth}
+  result: ${result}
+  match: ${match}
+
+
+jwt:
+  secret: ${key}

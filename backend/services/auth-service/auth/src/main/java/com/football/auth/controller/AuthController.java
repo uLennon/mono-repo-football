@@ -5,6 +5,7 @@ import com.football.auth.model.UserRequest;
 import com.football.auth.model.UserTeam;
 import com.football.auth.repository.UserRepository;
 import com.football.auth.security.JwtService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -35,7 +36,7 @@ public class AuthController {
 
 
     @PostMapping("/register")
-    public String register(@RequestBody User request) {
+    public ResponseEntity<User> register(@RequestBody User request) {
         User user = User.builder()
                 .username(request.getUsername())
                 .email(request.getEmail())
@@ -47,12 +48,12 @@ public class AuthController {
         userTeam.setAccount(request.getEmail());
         userRepository.save(user);
         kafkaTemplate.send("user-team",userTeam);
-        return "User registered successfully!";
+        return ResponseEntity.ok(User.builder().username(request.getUsername()).nameTeam(request.getNameTeam()).email(request.getEmail()).build());
     }
 
     @PostMapping("/login")
     public String login(@RequestBody UserRequest request) {
-         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
         User user = userRepository.findByEmail(request.getEmail()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
         String token = jwtService.generateToken(user);
         return token;

@@ -36,7 +36,6 @@ public class ResultMatchService {
         resultMatch.setMatchDate(playMatch.getMatchDate());
         resultMatch.setTeams(playMatch.getTeams());
         resultMachRepository.save(resultMatch);
-        System.out.println(resultMatch);
         enviarParaTodosClientes(resultMatch);
 
     }
@@ -97,8 +96,8 @@ public class ResultMatchService {
         System.out.println("fronts: " + emitters.size());
     }
 
-    public Page<ResultMatch> resultMatchPage(int page, int size) {
-        return resultMachRepository.findAll(PageRequest.of(page,size));
+    public Page<ResultMatch> resultMatchPage(int page, int size,String nameTeam) {
+        return resultMachRepository.findByTeamsName(nameTeam,PageRequest.of(page,size));
     }
 
 }

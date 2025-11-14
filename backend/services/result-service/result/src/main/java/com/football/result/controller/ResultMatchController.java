@@ -25,7 +25,8 @@ public class ResultMatchController {
 
     @GetMapping("/page")
     public Page<ResultMatch> listPageResulMatchs(@RequestParam(defaultValue = "0") int page,
-                                                 @RequestParam(defaultValue = "6") int size) {
-        return resultMatchService.resultMatchPage(page, size);
+                                                 @RequestParam(defaultValue = "6") int size,
+                                                 @RequestParam String nameTeam) {
+        return resultMatchService.resultMatchPage(page, size,nameTeam);
     }
 }

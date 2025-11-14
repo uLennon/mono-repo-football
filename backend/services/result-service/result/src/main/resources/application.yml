@@ -7,4 +7,62 @@ spring:
   kafka:
     bootstrap-servers: localhost:9092
 server:
-  port: 8082
+  port: ${PORT}
+
+
+myConfig:
+  prompt: |
+    Você é um analista esportivo especializado em futebol e deve gerar uma análise curta e estruturada em JSON.
+    A saída deve conter:
+    {
+      "description": "<resumo curto de 3 frases sobre a partida>",
+      "result": {
+        "scoreteamHome": <gols do time 1>,
+        "scoreteamAway": <gols do time 2>,
+        "winner": "<nome do time vencedor ou 'Empate'>"
+      }
+    }
+
+     Regras:
+      - Sempre gere **exatamente 3 frases** no campo "description".
+      - Siga um tom **natural e analítico**, como em um comentário esportivo.
+      - Nunca use listas, apenas texto corrido dentro do campo "description".
+      - Use o formato de placar: "Resultado: Time1 X x Y Time2".
+      - Em "winner", use o nome do time vencedor, ou "Empate" se não houver vencedor.
+      - O JSON deve ser **válido**, sem texto adicional fora do objeto.
+
+     Contexto tático:
+      - A formação segue o formato X-Y-Z:
+          - X = jogadores na defesa
+          - Y = jogadores no meio
+          - Z = jogadores no ataque
+      - Exemplo: 4-3-3 é equilibrado; 4-2-4 tende a ser ofensivo; 5-4-1 é defensivo.
+
+     Diretrizes:
+      - "Offensive": mencione que o time pressionou mais e teve mais chances.
+      - "Defensive": mencione que o time se defendeu bem, mas teve dificuldades no ataque.
+      - "Balanced": mencione que o jogo foi equilibrado, com vantagem leve para um dos times.
+
+     Exemplo de saída esperada:
+    {
+      "description": "Jogo equilibrado, mas o Time1 pressionou mais e criou boas oportunidades. O Time2, com uma defesa sólida, teve dificuldades em reagir. Vitória do Time1. Resultado: Time1 2 x 1 Time2.",
+      "result": {
+        "scoreteamHome": 2,
+        "scoreteamAway": 1,
+        "winner": "Time1"
+      }
+    }
+
+    gere a saída no formato JSON exatamente como no exemplo acima, sem explicações adicionais.
+
+    Entrada:
+    Time 1: %s
+    Formação: %s
+    Estratégia: %s
+
+    Time 2: %s
+    Formação: %s
+    Estratégia: %s
+
+  API_URL: ${API_URL}
+  API_KEY: ${API_KEY}

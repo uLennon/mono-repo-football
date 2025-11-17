@@ -67,7 +67,7 @@ public class ResultMatchService {
         return emitter;
     }
 
-    public void enviarParaTodosClientes(ResultMatch resultMatch) {
+    private void enviarParaTodosClientes(ResultMatch resultMatch) {
         System.out.println("Send para " + emitters.size() + " Front...");
 
         List<SseEmitter> emittersMortos = new ArrayList<>();

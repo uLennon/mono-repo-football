@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
@@ -53,12 +54,16 @@ public class IaGenerativeService {
         requestBody.put("max_tokens", 10000);
 
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(requestBody, headers);
-        var response = restTemplate.postForEntity(API_URL, entity, Response.class).getBody();
+        Response response;
+        try {
+            response = restTemplate.postForEntity(API_URL, entity, Response.class).getBody();
+        } catch (Exception e) {
+            return gerarDescricaoEmpate(team1, team2);
+        }
 
         if (response == null || response.choices() == null || response.choices().isEmpty()) {
             return gerarDescricaoEmpate(team1, team2);
         }
-
         return response.choices().getFirst().message().content();
     }
 

@@ -1,0 +1,42 @@
+
+<div class="d-flex align-items-center flex-column mb-3 side-header justify-content-center">
+    <div class="top-item w-100 d-flex justify-content-center py-3">
+        <i class="bi bi-globe-americas-fill fs-2 text-light"></i>
+    </div>
+    
+    <div class="center-items d-flex flex-column gap-3 w-100 px-3">
+        <a (click)="navegarPara('profile')" 
+            class="btn btn-outline-light btn-lg d-flex align-items-center justify-content-center gap-2 text-decoration-none w-100 py-2"
+            style="cursor: pointer;">
+            <i class="bi bi-person-lines-fill"></i>
+            <span class="d-none d-sm-block">Profile</span>
+        </a>
+        <a (click)="navegarPara('historic')" 
+           class="btn btn-outline-light btn-lg d-flex align-items-center justify-content-center gap-2 text-decoration-none py-2"
+           style="cursor: pointer;">
+            <i class="bi bi-bar-chart-line"></i>
+            <span>Historic</span>
+        </a>
+
+        <a (click)="navegarPara('formation')" 
+           class="btn btn-outline-light btn-lg d-flex align-items-center justify-content-center gap-2 text-decoration-none py-2"
+           style="cursor: pointer;">
+           <i class="bi bi-grid-3x3"></i>
+            <span>Formation</span>
+        </a>
+        
+        <a (click)="navegarPara('matches')" 
+            class="btn btn-outline-light btn-lg d-flex align-items-center justify-content-center gap-2 text-decoration-none w-100 py-2"
+            style="cursor: pointer;">
+            <i class="bi bi-bezier"></i>
+            <span class="d-none d-sm-block">Matches</span>
+        </a>
+
+   
+        <button (click)="logout()" 
+                class="btn btn-outline-danger btn-lg d-flex align-items-center justify-content-center gap-2 py-2">
+            <i class="bi bi-box-arrow-right"></i>
+            <span>Exit</span>
+        </button>
+    </div>
+</div>

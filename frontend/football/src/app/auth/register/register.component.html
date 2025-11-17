@@ -1,0 +1,186 @@
+<div class="container-fluid vh-100" style="background: linear-gradient(135deg, #0a0a18 0%, #1a1a2e 100%);">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-4">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-success text-white text-center py-4 position-relative">
+                    <div class="position-absolute top-0 start-0 end-0 bg-white opacity-25" style="height: 15px;"></div>
+                    <div class="position-absolute bottom-0 start-0 end-0 bg-white opacity-25" style="height: 15px;"></div>
+                    
+                    <div class="bg-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                         style="width: 80px; height: 80px;">
+                        <i class="bi bi-person-plus-fill text-success fs-1"></i>
+                    </div>
+                    <h2 class="mb-0 fw-bold">⚽ Create Account</h2>
+                    <p class="mb-0 opacity-75">Register your team on FutiSync</p>
+                </div>
+
+                <div class="card-body p-5">
+                    <form (ngSubmit)="onRegisterSubmit()" #registerForm="ngForm">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold text-dark">
+                                <i class="bi bi-person-badge-fill text-primary me-2"></i>
+                                Name Full
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0">
+                                    <i class="bi bi-person text-muted"></i>
+                                </span>
+                                <input 
+                                    type="text" 
+                                    class="form-control border-start-0"
+                                    [(ngModel)]="newUser.name" 
+                                    name="name" 
+                                    required 
+                                    placeholder="Seu nome completo">
+                            </div>
+                        </div>
+
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-bold text-dark">
+                                <i class="bi bi-at text-primary me-2"></i>
+                                Name User
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0">
+                                    <i class="bi bi-person-circle text-muted"></i>
+                                </span>
+                                <input 
+                                    type="text" 
+                                    class="form-control border-start-0"
+                                    [(ngModel)]="newUser.username" 
+                                    name="username" 
+                                    required 
+                                    placeholder="Nome de usuário único">
+                            </div>
+                        </div>
+
+                    
+                        <div class="mb-3">
+                            <label class="form-label fw-bold text-dark">
+                                <i class="bi bi-envelope-fill text-primary me-2"></i>
+                                Email
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0">
+                                    <i class="bi bi-envelope text-muted"></i>
+                                </span>
+                                <input 
+                                    type="email" 
+                                    class="form-control border-start-0"
+                                    [(ngModel)]="newUser.email" 
+                                    name="email" 
+                                    required 
+                                    email
+                                    placeholder="seu.email@exemplo.com">
+                            </div>
+                        </div>
+
+                       
+                        <div class="mb-3">
+                            <label class="form-label fw-bold text-dark">
+                                <i class="bi bi-people-fill text-primary me-2"></i>
+                                Team Name
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0">
+                                    <i class="bi bi-trophy text-muted"></i>
+                                </span>
+                                <input 
+                                    type="text" 
+                                    class="form-control border-start-0"
+                                    [(ngModel)]="newUser.nameTeam" 
+                                    name="nameTeam" 
+                                    required 
+                                    placeholder="Nome da sua equipe">
+                            </div>
+                        </div>
+
+                     
+                        <div class="mb-4">
+                            <label class="form-label fw-bold text-dark">
+                                <i class="bi bi-lock-fill text-primary me-2"></i>
+                                Password
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0">
+                                    <i class="bi bi-key text-muted"></i>
+                                </span>
+                                <input 
+                                    type="password" 
+                                    class="form-control border-start-0"
+                                    [(ngModel)]="newUser.password" 
+                                    name="password" 
+                                    required 
+                                    minlength="6"
+                                    placeholder="Mínimo 6 caracteres">
+                            </div>
+                        </div>
+
+                        
+                        <div class="mb-4">
+                            <label class="form-label fw-bold text-dark">
+                                <i class="bi bi-lock-fill text-primary me-2"></i>
+                                Confirm Password
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0">
+                                    <i class="bi bi-key-fill text-muted"></i>
+                                </span>
+                                <input 
+                                    type="password" 
+                                    class="form-control border-start-0"
+                                    [(ngModel)]="confirmPassword" 
+                                    name="confirmPassword" 
+                                    required 
+                                    placeholder="Digite novamente sua senha">
+                            </div>
+                            <div *ngIf="passwordMismatch" class="text-danger small mt-1">
+                                <i class="bi bi-exclamation-circle me-1"></i>
+                                The passwords don't match.
+                            </div>
+                        </div>
+
+                      
+                        <div *ngIf="errorMessage" class="alert alert-danger d-flex align-items-center mb-4">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                            {{ errorMessage }}
+                        </div>
+
+                       
+                        <div *ngIf="successMessage" class="alert alert-success d-flex align-items-center mb-4">
+                            <i class="bi bi-check-circle-fill me-2"></i>
+                            {{ successMessage }}
+                        </div>
+
+                        
+                        <button 
+                            type="submit" 
+                            class="btn btn-success btn-lg w-100 py-3 fw-bold"
+                            [disabled]="registerForm.invalid || passwordMismatch">
+                            <i class="bi bi-person-plus-fill me-2"></i>
+                            Create Account
+                        </button>
+                    </form>
+
+                    
+                    <div class="text-center mt-4">
+                        <p class="text-muted mb-0">
+                            Do you already have an account?
+                            <a routerLink="/login" class="text-success fw-bold text-decoration-none ms-1">
+                                Log in
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card-footer bg-light text-center py-3">
+                    <small class="text-muted">
+                        <i class="bi bi-shield-check me-1"></i>
+                        FutiSync
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

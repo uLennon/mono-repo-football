@@ -1,0 +1,25 @@
+:host{
+    flex-grow: 1;
+
+}
+
+.side-header {
+    height: 100%;
+    width: 250px;
+    background-color: rgb(10, 10, 24);
+}
+
+.side-header p {
+    text-align: center;
+}
+
+.side-header .top-item {
+    margin-top: 10%;  
+}
+
+.side-header .center-items {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+}

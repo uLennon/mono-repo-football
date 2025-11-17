@@ -1,43 +1,27 @@
 package com.football.team.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Data;
-
-import java.util.List;
+import lombok.*;
 
 @Entity
 @Table(name = "players")
-@Data
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Player {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    @Column(name = "name", nullable = false)
     private String name;
-
-    @Column(name = "position")
     private String position;
+    private String number;
 
-    @Column(name = "number")
-    private Integer number;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "team_id")
-    @JsonBackReference("team-players")
-    private Team team;
-
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "preset_id")
-    @JsonBackReference("preset-players")
+    @JsonBackReference
     private Preset preset;
-
-    @OneToMany(mappedBy = "player", fetch = FetchType.LAZY)
-    @JsonManagedReference("player-correlates")
-    private List<Correlate> presetsCorrelate;
 
 }

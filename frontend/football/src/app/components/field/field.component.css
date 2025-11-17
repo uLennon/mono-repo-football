@@ -1,0 +1,258 @@
+
+:host{
+  flex-grow: 1;
+}
+
+.field-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.pitch {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 900px;       
+  aspect-ratio: 2 / 3;     
+  background-color: #228B22;
+  border: 2px solid #fff;
+  border-radius: 0.5rem; 
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  margin: 0 auto;      
+  overflow: hidden;   
+}
+
+
+.half-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #fff;
+  transform: translateY(-50%);
+}
+
+
+.center-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150px;
+  height: 150px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.center-spot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.penalty-area {
+  position: absolute;
+  width: 350px;
+  height: 120px;
+  border: 2px solid #fff;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.penalty-area.top { top: 0; }
+.penalty-area.bottom { bottom: 0; }
+
+.half-circle {
+  position: absolute;
+  width: 100px;          
+  height: 50px;          
+  border: 2px solid white; 
+  border-radius: 100px 100px 0 0; 
+  border-bottom: none;     
+  transform: rotate(180deg); 
+  background: transparent;
+  left: 50%;
+  transform: translateX(-50%) rotate(180deg);  
+}
+
+.half-circle.top{ 
+  top: 82.5%;
+  transform: translateX(-50%) rotate(0deg); 
+}
+
+.half-circle.bottom{ 
+  top: 120px;
+}
+
+
+
+.goal-area {
+  position: absolute;
+  width: 100px;
+  height: 40px;
+  border: 2px solid #fff;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.goal-area.top { top: 0; }
+.goal-area.bottom { bottom: 0; }
+
+.goal {
+  position: absolute;
+  width: 60px;
+  height: 10px;
+  border: 2px solid #fff;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.goal.top { top: -10px; }
+.goal.bottom { bottom: -10px; }
+
+.penalty-spot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  border-radius: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.penalty-spot.top { top: 80px; }
+.penalty-spot.bottom { bottom: 80px; }
+
+
+
+.player {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #0a0a18 0%, #1a1a2e 100%);
+  border: 2px solid white;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+  cursor: move;
+  user-select: none;
+  transition: all 0.2s ease;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+.player-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.player-number {
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.player-name {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  margin-top: 5px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 2px 6px;
+  border-radius: 3px;
+  white-space: nowrap;
+  z-index: 11;
+}
+
+
+.player:hover .player-name {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.player:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.player.dragging {
+  opacity: 0.8;
+  transform: translate(-50%, -50%) scale(1.2);
+  z-index: 100;
+}
+
+.player.dragging .player-name {
+  opacity: 0.8;
+}
+
+.player.selected {
+  border: 3px solid #ffeb3b;
+  box-shadow: 0 0 10px #ffeb3b;
+}
+
+.player.selected .player-name {
+  background: rgba(255, 235, 59, 0.3);
+  color: #ffeb3b;
+}
+
+.controls {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.btn-reset, .btn-save {
+  background: #2196F3;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-reset:hover, .btn-save:hover {
+  background: #1976D2;
+}
+
+.half-line, .center-circle, .center-spot,
+.penalty-area, .half-circle, .goal-area, .goal, .penalty-spot {
+  position: absolute;
+  border: 2px solid white;
+  background: transparent;
+}
+
+.field-area {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 1;
+}

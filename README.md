@@ -95,7 +95,7 @@ A seguir estão algumas telas principais do funcionamento do FutiSync:
 Nesta tela o usuário realiza a autenticação para acessar o sistema.  
 Aqui ocorre a validação de usuário e senha antes de acessar as funcionalidades internas.
 
-<img width="1334" height="812" alt="Image" src="https://github.com/user-attachments/assets/d3b90053-6741-4201-a235-b9871d2cc51d" />
+<img width="1334" height="812" alt="Image" src="https://github.com/user-attachments/assets/f12b5364-7c86-433a-b0bc-8dc4655d8554" />
 
 ---
 
@@ -103,7 +103,7 @@ Aqui ocorre a validação de usuário e senha antes de acessar as funcionalidade
 Nesta visualização principal o usuário pode arrastar os jogadores para qualquer posição do campo e montar a formação desejada.  
 Ao mover o jogador, o sistema atualiza automaticamente sua posição de acordo com o local escolhido no campo.
 
-<img width="1850" height="958" alt="Image" src="https://github.com/user-attachments/assets/eff8fc3f-caa4-4209-b633-bfcc17de05ef" />
+<img width="1850" height="958" alt="Image" src="https://github.com/user-attachments/assets/da4d6b30-27d0-4215-966b-d833a5f15d4f" />
 
 ---
 
@@ -111,7 +111,7 @@ Ao mover o jogador, o sistema atualiza automaticamente sua posição de acordo c
 Nesta tela o usuário pode visualizar os adversários disponíveis e selecionar contra quem deseja jogar.  
 O sistema apresenta uma lista de possíveis adversários para iniciar uma nova partida.
 
-<img width="1855" height="963" alt="Image" src="https://github.com/user-attachments/assets/e2430f2e-1fea-4f2e-b3cd-a3024416dfdd" />
+<img width="1855" height="963" alt="Image" src="https://github.com/user-attachments/assets/6226ece0-6211-415e-8489-be99af7f9581" />
 
 ---
 
@@ -119,7 +119,7 @@ O sistema apresenta uma lista de possíveis adversários para iniciar uma nova p
 Aqui o usuário pode consultar todas as partidas realizadas anteriormente.  
 O histórico mostra resultados, datas, adversários e outras informações relevantes de cada jogo já realizado.
 
-<img width="1852" height="902" alt="Image" src="https://github.com/user-attachments/assets/ceeba574-8997-4a0f-a4b8-66707655e8ed" />
+<img width="1852" height="902" alt="Image" src="https://github.com/user-attachments/assets/f99b6e79-1b94-458c-9d51-3f48bc630853" />
 
 ---
 
